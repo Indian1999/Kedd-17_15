@@ -7,3 +7,14 @@ print(szöveg_szavanként)
 
 szöveg_azként = szöveg.split("az")
 print(szöveg_azként)
+
+első_n = szöveg.find("n")
+print("Az 'n' karatker első előfordálásnak helye:", első_n)
+
+első_az = szöveg.find("az")
+print("Az 'az' karatkersorozat első előfordálásnak helye:", első_az)
+
+print(szöveg.startswith("A"))
+print(szöveg.startswith("x"))
+print(szöveg.endswith("."))
+print(szöveg.endswith("k"))
