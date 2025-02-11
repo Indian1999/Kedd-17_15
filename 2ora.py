@@ -26,3 +26,5 @@ print(szó.lower())      # kutya
 print(szó.upper())      # KUTYA
 
 print("a cica története".title()) # Minden szót nagybetűvel kezd
+
+print(szöveg.lower().count("a"))
