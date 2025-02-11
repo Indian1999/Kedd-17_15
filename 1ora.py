@@ -29,4 +29,5 @@ else:
     print("Nem vagyok valami okos.")
 
 print("commit test")
+print("commit2")
 
