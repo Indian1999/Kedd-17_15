@@ -18,3 +18,11 @@ print(szöveg.startswith("A"))
 print(szöveg.startswith("x"))
 print(szöveg.endswith("."))
 print(szöveg.endswith("k"))
+
+szó = "kUtYa"
+print(szó)
+print(szó.capitalize()) # Kutya
+print(szó.lower())      # kutya
+print(szó.upper())      # KUTYA
+
+print("a cica története".title()) # Minden szót nagybetűvel kezd
