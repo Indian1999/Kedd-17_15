@@ -50,7 +50,6 @@ print(lista)
 for item in lista:
     összeg += item
 print("A lista elemeinek az összege:", összeg)
-
 # 2. feladat: Határozzuk meg a pozitív számok összegét!
 
 # 3. feladat: Melyik a legnagyobb szám?
