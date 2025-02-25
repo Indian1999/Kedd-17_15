@@ -79,3 +79,10 @@ print("A lista elemeinek az átlaga:", round(összeg/len(lista), 2))
 # 7. feladat: Válogassuk szét a lista elemeit két másik listára: pozitívak és negatívak
 pos_lista = []
 neg_lista = []
+for item in lista:
+    if item < 0:
+        neg_lista.append(item)
+    if item > 0:
+        pos_lista.append(item)
+print("Pozitív számok:", pos_lista)
+print("Negatív számok:", neg_lista)
