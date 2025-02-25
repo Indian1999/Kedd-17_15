@@ -4,7 +4,7 @@ while i <= 10:
     print(i, end = " ")
     i += 1
 print()
-
+print()
 lista = []
 bemenet = "default"
 while bemenet != "":
