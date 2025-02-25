@@ -86,3 +86,19 @@ for item in lista:
         pos_lista.append(item)
 print("Pozitív számok:", pos_lista)
 print("Negatív számok:", neg_lista)
+
+for i in range(1, 11):
+    for j in range(i):
+        print(j+1, end = " ")
+    print()
+    
+num = int(input("Adj meg egy egész számot!\n"))
+prime = True
+for i in range(2, num):
+    if num % i == 0:
+        prime = False
+if prime:
+    print("Ez egy prímszám.")
+else:
+    print("Ez egy összetett szám.")
+
