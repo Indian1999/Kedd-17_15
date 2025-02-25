@@ -34,7 +34,7 @@ elif points > 75:
     print("4-es")
 elif points > 60:
     print("3-as")
-elif points >= 45:
+elif points > 45:
     print("2-es")
 else:
     print("1-es")
