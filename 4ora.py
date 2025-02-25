@@ -42,3 +42,23 @@ print()
 for i in range(len(lista)):
     print(lista[i], end = " ")
 print()
+
+lista = [11, -4, 7, 1, 6, -5, -12, 0, 11, 14, -8, -9, 2, 23, 11, 10, -4, 0, 18, 4, 8, 1, 1, 11]
+print(lista)
+# 1. feladat: Határozzuk meg a lista elemeinek az összegét!
+összeg = 0
+for item in lista:
+    összeg += item
+print("A lista elemeinek az összege:", összeg)
+
+# 2. feladat: Határozzuk meg a pozitív számok összegét!
+
+# 3. feladat: Melyik a legnagyobb szám?
+
+# 4. feladat: Melyik a legkisebb szám?
+
+# 5. fealdat: Hány darab 10-nél nagyobb szám van a listában?
+
+# 6. feladat: Határozzuk meg a lista elemeinek az átlagát!
+
+# 7. feladat: Válogassuk szét a lista elemeit két másik listára: pozitívak és negatívak
