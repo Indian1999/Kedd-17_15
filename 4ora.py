@@ -51,13 +51,31 @@ for item in lista:
     összeg += item
 print("A lista elemeinek az összege:", összeg)
 # 2. feladat: Határozzuk meg a pozitív számok összegét!
-
+összeg = 0
+for item in lista:
+    if item > 0:
+        összeg += item
+print("A lista pozitív elemeinek az összege:", összeg)
 # 3. feladat: Melyik a legnagyobb szám?
-
+max_index = 0
+for i in range(len(lista)):
+    if lista[i] > lista[max_index]:
+        max_index = i
+print("A legnagyobb szám:", lista[max_index])
 # 4. feladat: Melyik a legkisebb szám?
-
+min_index = 0
+for i in range(len(lista)):
+    if lista[i] < lista[min_index]:
+        min_index = i
+print("A legkisebb szám:", lista[min_index])
 # 5. fealdat: Hány darab 10-nél nagyobb szám van a listában?
-
+számláló = 0
+for item in lista:
+    if item > 10:
+        számláló += 1
+print(számláló, "db 10-nél nagyobb szám van a listában")
 # 6. feladat: Határozzuk meg a lista elemeinek az átlagát!
-
+print("A lista elemeinek az átlaga:", round(összeg/len(lista), 2))
 # 7. feladat: Válogassuk szét a lista elemeit két másik listára: pozitívak és negatívak
+pos_lista = []
+neg_lista = []
