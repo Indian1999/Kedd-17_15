@@ -43,9 +43,29 @@ while i < 8:
 # 2. módszer:
 for i in range(-7, 8):
     print( "*" * ( 8 - int(math.fabs(i)) ) )
-# 2. feladat: Olvassunk be folyamatosan számokat, amiket összegezzünk, egész addig, amíg 0-t nem írunk be
+# 2. feladat: Olvassunk be folyamatosan számokat, amiket összegezzünk, egészen addig, amíg 0-t nem írunk be
 #5, 3, 4, 6, 0 -> 18 
+összeg = 0
+num = None
+while num != 0:
+    num = int(input("Adj meg egy egész számot: "))
+    összeg += num
+print("A beírt számok összege:", összeg)
+
 # 3. feladat: Írjunk egy programot, ami eldönti egy számról, hogy prímszám-e! While ciklussal
+num = int(input("Adj meg egy számot, amiről tudni akarod, hogy prím-e!\n"))
+isPrime = True
+i = 2
+while isPrime and i <= num // 2:
+    if num % i == 0:
+        isPrime = False
+    i += 1
+    if i % 1000000 == 0:
+        print(i)
+if isPrime:
+    print("Ez egy prím.")
+else:
+    print("Ez nem egy prím.")
 
 
 
