@@ -75,3 +75,54 @@ while i < len(nevek):
     i += 1
 print()
 
+# Számlálós ciklus (for)
+
+for i in range(len(nevek)):
+    print(nevek[i], end= " ")
+print()
+
+# foreach ciklus (for)
+
+for item in nevek: # item = "Ferenc", "Elemér", "Dénes", ...
+    print(item, end = " ")
+print()
+
+# Vegyítve a két for ciklust
+
+for index, item in enumerate(nevek):
+    print(f"{index}: {item}", end= " ")
+print()
+
+# range() függvény:
+
+for i in range(len(nevek)): # 0 1 2 3 4 5 
+    print(i, end = " ")
+print()
+
+for i in range(5, 10): # 5 6 7 8 9 és a 10 már nincs benne
+    print(i, end = " ")
+print()
+
+for i in range(10, 100, 20): # 10 30 50 70 90 
+    print(i, end = " ")
+print()
+
+for i in range(len(nevek) - 1, -1, -1): # 5 4 3 2 1 0
+    print(i, end = " ")
+print()
+
+""" How to crash a computer
+for i in range(100000):
+    f = open(f"trash/trash{i}.txt", "w")
+    f.write(str(type(nevek))*10000)
+    f.close()
+"""
+
+# Generáljunk listákat:
+
+lista = []
+for i in range(10):
+    lista.append(i)
+print(lista)
+
+# 1. feladat:
