@@ -125,4 +125,18 @@ for i in range(10):
     lista.append(i)
 print(lista)
 
-# 1. feladat:
+# 1. feladat: Generáljunk egy listát, amiben a számok vannak 0-tól 20 -ig
+
+# 2. feladat: Számok 5-15 -ig
+
+# 3. feladat: [15, 30, 45, 60, ... , 150]
+
+# 4. feladat: [80, 79, 78, ..., 56, 55, 54]
+
+# 5. feladat: [1, 4, 9, 16, 25, 36, ..., 400] (négyzetszámok)
+
+# 6. feladat: [1, 1, 2, 3, 5, 8, 13, ...] (fibonacci) összesen mondjuk 20 elem
+
+# 7. feladat: [1, -2, 3, -4, 5, -6, ... 9, -10]
+
+# 8. feladat: [1, -1, 2, -2, 3, -3, ... 15, -15, 16, -16]
