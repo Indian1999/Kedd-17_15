@@ -126,17 +126,51 @@ for i in range(10):
 print(lista)
 
 # 1. feladat: Generáljunk egy listát, amiben a számok vannak 0-tól 20 -ig
+lista = []
+for i in range(21):
+    lista.append(i)
+print(lista)
 
 # 2. feladat: Számok 5-15 -ig
+lista = []
+for i in range(5, 16):
+    lista.append(i)
+print(lista)
 
 # 3. feladat: [15, 30, 45, 60, ... , 150]
+lista = []
+for i in range(15, 151, 15):
+    lista.append(i)
+print(lista)
 
 # 4. feladat: [80, 79, 78, ..., 56, 55, 54]
+lista = []
+for i in range(80, 53, -1):
+    lista.append(i)
+print(lista)
 
 # 5. feladat: [1, 4, 9, 16, 25, 36, ..., 400] (négyzetszámok)
+lista = []
+for i in range(1, 21):
+    lista.append(i*i)
+print(lista)
 
 # 6. feladat: [1, 1, 2, 3, 5, 8, 13, ...] (fibonacci) összesen mondjuk 20 elem
+lista = [1, 1]
+while len(lista) < 20:
+    lista.append(lista[-1] + lista[-2])
+print(lista)
 
 # 7. feladat: [1, -2, 3, -4, 5, -6, ... 9, -10]
+for i in range(1, 11):
+    if i % 2 == 0:
+        lista.append(-i)
+    else:
+        lista.append(i)
 
 # 8. feladat: [1, -1, 2, -2, 3, -3, ... 15, -15, 16, -16]
+
+
+# 9. feladat: [az első 20 prímszámot tartalmazza]
+
+# 10. feladat: [100-999, azok a számok, amelyekben szerepel a 13] (132, 813)
