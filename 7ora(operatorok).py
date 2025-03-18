@@ -125,6 +125,12 @@ for i in range(a):
 # 3. feladat: Szöveg kódolás
 # kimenet = "Kdlifgmetasöeeóon oo z  zvgt"
 bemenet = "Kódolni fogom ezt a szöveget"
+kimenet = ""
+for i in range(0, len(bemenet), 2):
+    kimenet += bemenet[i]
+for i in range(1, len(bemenet), 2):
+    kimenet += bemenet[i]
+print(kimenet)
 
 # 4. feladat: Olvassunk be egy számot és írjuk ki a szorzó tábláját
 # Kimenet:
@@ -134,6 +140,18 @@ bemenet = "Kódolni fogom ezt a szöveget"
 # ...
 # 10 * 3 = 30
 num = int(input("Adj meg egy 1-10 közötti egész számot!\n"))
+for i in range(1, 11):
+    if i == 10:
+        if num * i < 10:
+            print(f"{i} * {num} =  {i*num}")
+        else:
+            print(f"{i} * {num} = {i*num}")
+            
+    else:
+        if num * i < 10:
+            print(f" {i} * {num} =  {i*num}")
+        else:
+            print(f" {i} * {num} = {i*num}")
 
 
 
