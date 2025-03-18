@@ -83,4 +83,18 @@ print(not 5 > 1)       # not True -> False
 # h | i |    h   |    i     |   i   |   h
 # h | h |    h   |    h     |   i   |   i
 
+# Az in operátor
+# Meghatározza, hogy x elem benne van-e egy adatszerkezetben
+# 5 in lista
+# True vagy False értéked
+lista = [6,2,5,8,3]
+print(5 in lista) # True
+print(9 in lista) # False
+
+szöveg = "kiscica"
+print("c" in szöveg) # True
+print("p" in szöveg) # False
+
+# Bit szintű operátorok (ezekről majd később)
+# &, |, ^, ~, <<, >>
 
