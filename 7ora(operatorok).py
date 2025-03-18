@@ -65,3 +65,22 @@ print(5 < 2)  # False
 print(5 == 8) # False
 print(5 >= 5) # True
 print(4 <= 2) # False
+print(5 != 2) # True
+
+
+# Logikai operátorok
+# Logikai értékekkel kezdenek valamit
+# (ÉS, VAGY, NEM) [and, or, not]
+# Mindig egy logikai értéket ad eredményül
+print(5 > 1 and 3 > 4) # True and False -> False
+print(5 > 1 or 3 > 4)  # True or False  -> True
+print(not 5 > 1)       # not True -> False
+
+# Logikai kapuk:
+# A | B | A és B | A vagy B | nem A | nem B
+# i | i |    i   |    i     |   h   |   h
+# i | h |    h   |    i     |   h   |   i
+# h | i |    h   |    i     |   i   |   h
+# h | h |    h   |    h     |   i   |   i
+
+
