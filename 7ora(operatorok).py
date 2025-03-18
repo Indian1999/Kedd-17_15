@@ -98,3 +98,38 @@ print("p" in szöveg) # False
 # Bit szintű operátorok (ezekről majd később)
 # &, |, ^, ~, <<, >>
 
+
+# 1. feladat: Adott 2 lista
+# Egyesítsük egy új listába ezt a kettőt úgy, hogy ne legyenek duplikációk
+# Pálda kimenet: [43, 12, 75, 23, 99, 13, 54, 92, 11] (sorrend mindegy)
+lista_1 = [43, 12, 75, 23, 99]
+lista_2 = [13, 54, 43, 12, 92, 12, 11]
+
+# 2. feladat: Jelenítsünk meg egy a, b oldalú téglalapot
+# Kimenet:
+##########
+##########
+##########
+##########
+##########
+a = 5
+b = 10
+
+# 3. feladat: Szöveg kódolás
+# kimenet = "Kdlifgmetasöeeóon oo z  zvgt"
+bemenet = "Kódolni fogom ezt a szöveget"
+
+# 4. feladat: Olvassunk be egy számot és írjuk ki a szorzó tábláját
+# Kimenet:
+# 1 * 3 = 3
+# 2 * 3 = 6
+# 3 * 3 = 9
+# ...
+# 10 * 3 = 30
+num = int(input("Adj meg egy 1-10 közötti egész számot!\n"))
+
+
+
+
+
+
