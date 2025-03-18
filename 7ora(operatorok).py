@@ -35,3 +35,33 @@ print(25**(1/2)) # 5.0 (float)
 # //  maradék nélküli osztás (int)
 # %   maradékos osztás
 # **  hatványozás, ha gyököt vonni akarunk, akkor tört hatványra emelünk
+
+# Értékadó operátorok (SZINTE bármi amiben =-jel van)
+# egy változónak értéket ad
+num = 10 # A num változónak a 10 értéket adja
+print(f"num = {num}") # 10
+num += 5 # A num értékéhez hozzáad 5-öt
+print(f"num = {num}") # 15
+num -= 3
+print(f"num = {num}") # 12
+num *= 4 
+print(f"num = {num}") # 48
+num /= 2
+print(f"num = {num}") # 24.0 INNENTŐL KEZDVE A num egy float lesz
+num //= 2
+print(f"num = {num}") # 12.0
+num **= 2
+print(f"num = {num}") # 144.0
+num %= 10
+print(f"num = {num}") # 4.0
+
+# Értékadó operátor (=, aritmetikai + =)
+
+# Összehasonlító operátorok (True vagy False értéket ad)
+# két értéket összehasonlít
+
+print(5 > 1)  # True
+print(5 < 2)  # False
+print(5 == 8) # False
+print(5 >= 5) # True
+print(4 <= 2) # False
