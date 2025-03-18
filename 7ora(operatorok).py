@@ -104,16 +104,23 @@ print("p" in szöveg) # False
 # Pálda kimenet: [43, 12, 75, 23, 99, 13, 54, 92, 11] (sorrend mindegy)
 lista_1 = [43, 12, 75, 23, 99]
 lista_2 = [13, 54, 43, 12, 92, 12, 11]
+lista_3 = lista_1[:]
+for item in lista_2:
+    if item not in lista_3:
+        lista_3.append(item)
+print(lista_3)
 
 # 2. feladat: Jelenítsünk meg egy a, b oldalú téglalapot
-# Kimenet:
-##########
-##########
-##########
-##########
-##########
 a = 5
 b = 10
+for i in range(a):
+    print("#" * b)
+print()
+for i in range(a):
+    if i == 0 or i == a-1:
+        print("#" * b)
+    else:
+        print("#" + " "*(b-2) + "#")
 
 # 3. feladat: Szöveg kódolás
 # kimenet = "Kdlifgmetasöeeóon oo z  zvgt"
