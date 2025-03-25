@@ -7,6 +7,7 @@ board = [
 ]
 gameOn = True
 player_1_turn = True
+winner = "draw"
 
 def show_board():
     print("# | 1 | 2 | 3 ")
@@ -35,6 +36,37 @@ def read_and_put_symbol():
             else:
                 board[sor-1][oszlop-1] = "X"
     
+def check_for_win():
+    # Sorok ellenőrzése
+    for i in range(3):
+        if board[i][0] == board[i][1] and board[i][1] == board[i][2]:
+            if player_1_turn:
+                winner = "O wins"
+            else:
+                winner = "X wins"
+            return True
+    # Oszlopok ellenőrzése
+    for i in range(3):
+        if board[0][i] == board[1][i] and board[1][i] == board[2][i]:
+            if player_1_turn:
+                winner = "O wins"
+            else:
+                winner = "X wins"
+            return True
+    # Átlók ellenőrzése
+    if board[0][0] == board[1][1] and board[1][1] == board[2][2]: #Főátló
+            if player_1_turn:
+                winner = "O wins"
+            else:
+                winner = "X wins"
+            return True    
+    if board[0][2] == board[1][1] and board[1][1] == board[2][0]: #Mellékátló
+            if player_1_turn:
+                winner = "O wins"
+            else:
+                winner = "X wins"
+            return True    
+    
 while gameOn:
     # A játékállás megjelenítése
     show_board()
@@ -43,6 +75,7 @@ while gameOn:
     read_and_put_symbol()
     
     # Win condition ellenőrzése
+    check_for_win()
     
     
         
