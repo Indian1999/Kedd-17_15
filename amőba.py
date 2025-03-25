@@ -39,7 +39,7 @@ def read_and_put_symbol():
 def check_for_win():
     # Sorok ellenőrzése
     for i in range(3):
-        if board[i][0] == board[i][1] and board[i][1] == board[i][2]:
+        if board[i][0] == board[i][1] and board[i][1] == board[i][2] and board[i][0] != "-":
             if player_1_turn:
                 winner = "O wins"
             else:
@@ -47,26 +47,34 @@ def check_for_win():
             return True
     # Oszlopok ellenőrzése
     for i in range(3):
-        if board[0][i] == board[1][i] and board[1][i] == board[2][i]:
+        if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[2][i] != "-":
             if player_1_turn:
                 winner = "O wins"
             else:
                 winner = "X wins"
             return True
     # Átlók ellenőrzése
-    if board[0][0] == board[1][1] and board[1][1] == board[2][2]: #Főátló
+    if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] != "-": #Főátló
             if player_1_turn:
                 winner = "O wins"
             else:
                 winner = "X wins"
             return True    
-    if board[0][2] == board[1][1] and board[1][1] == board[2][0]: #Mellékátló
+    if board[0][2] == board[1][1] and board[1][1] == board[2][0] and board[1][1] != "-": #Mellékátló
             if player_1_turn:
                 winner = "O wins"
             else:
                 winner = "X wins"
-            return True    
-    
+            return True   
+    return False 
+  
+def check_for_draw():
+    for lista in board:
+        print(lista)
+        if "-" in lista:
+            return False
+    return True
+  
 while gameOn:
     # A játékállás megjelenítése
     show_board()
@@ -75,8 +83,15 @@ while gameOn:
     read_and_put_symbol()
     
     # Win condition ellenőrzése
-    check_for_win()
-    
+    have_winner = check_for_win()
+    if have_winner:
+        gameOn = False
+        break # Kilép a ciklusból
+    draw = check_for_draw()
+    if draw:
+        break
+    player_1_turn = not player_1_turn
+print(winner)
     
         
     
