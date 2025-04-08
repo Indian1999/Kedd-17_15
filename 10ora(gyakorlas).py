@@ -75,17 +75,20 @@ def absolute(x):
 def squared(x):
     return (x - 6) * (x + 2)
 
-func = squared
+def polinom(x):
+    return (x - 150) * (x+30) * (x-6) * (x+43) * (x-61) * (x-16) * (x+76)
+
+func = polinom
+zérus_helyek = []
 y = func(0)
 i = 1
-while y != 0:
+while i < 300:
     y = func(i)
     if y == 0:
-        break
+        zérus_helyek.append(i)
     y = func(-i)
     if y == 0:
-        i = -i
-        break
+        zérus_helyek.append(-i)
     i += 1
-print("Zérushely: x =", i)
+print("Zérushelyek:", zérus_helyek)
 
