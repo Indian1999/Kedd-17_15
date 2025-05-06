@@ -22,17 +22,46 @@ print(szöveg)
 print(f"Ebben a szövegben {vowel_counter} magánhangzó, {constenant_counter} mássalhangzó, {space_counter} szóköz és {special_counter} speciális karakter található.")
 print(f"A szöveg {len(szöveg)} karakter hosszú.")
 
-#2. feladat: határozzuk meg egy szám számjegyeinek az összegét
+#2. feladat: 18:10 határozzuk meg egy szám számjegyeinek az összegét 18:10
+def digit_sum(num):
+    összeg = 0
+    for char in str(num):
+        if char != ".":
+            összeg += int(char)
+    return összeg
 
-#3. feladat: Olvassuk be egy tört számlálóját és nevezőjét, majd hozzuk a lehető legegyszerűbb alakra a törtet pl.: 100/12 -> 25/3
+print(digit_sum(12345))
+print(digit_sum(10000))
+print(digit_sum(13.543))
 
-#4. feladat: Legyen adott 2 tört, szorozzuk össze őket, és írjuk ki az eredményt a legegyszerűbb alakban
+#3. feladat: 18:15 Olvassuk be egy tört számlálóját és nevezőjét, majd hozzuk a lehető legegyszerűbb alakra a törtet pl.: 100/12 -> 25/3
+def lnko(a, b):
+    if a < 0:
+        a *= -1
+    if b < 0:
+        b *= -1
+    oszto = 1
+    for i in range(2, min(a,b) + 1):
+        if a % i == 0 and b % i == 0:
+            oszto = i
+    return oszto
 
-#5. feladat: Döntsük el egy számról, hogy tökéletes-e!
+def simplify_fraction(számláló, nevező):
+    oszto = lnko(számláló, nevező)
+    return [számláló//oszto, nevező//oszto]
+
+print(simplify_fraction(8, 4))
+print(simplify_fraction(-80, 20))
+print(simplify_fraction(100, 12))
+print(simplify_fraction(1024, 64))
+
+#4. feladat: 18:30 Legyen adott 2 tört, szorozzuk össze őket, és írjuk ki az eredményt a legegyszerűbb alakban
+
+#5. feladat: 18:40 Döntsük el egy számról, hogy tökéletes-e!
 # Egy szám akkor tökéletes, ha az osztóinak összege (önmagát kivéve), pont az adott szám
 # pl.: 6 = 1 + 2 + 3 = 6
 
-#6. feladat: Adott egy lista
+#6. feladat: 18:55 Adott egy lista
 # Határozzuk meg a lista elemeinek átlagát
 # Medián (középső elem) [3, 6, 7, 9, 13, 15, 17, 18, 20] 13
 # [3, 6, 7, 9, 13, 14, 15, 17, 18, 20] -> (13 + 14) / 2 -> 13,5
