@@ -68,7 +68,15 @@ Talán meg lehetne próbálni elterelni a figyelmét valamivel...""")
             print("Még mindig őriz valamit az oroszlán.")
         elterelés = input("Megpróbálod elterelni az oroszlán figyelmét? (igen/nem)\n")
         if elterelés == "igen":
-            pass
+            if "hús" in items:
+                print("""A sarokba dobod a korábban talált szelet húst. Az oroszlán odaszalad felfalni
+és ezáltal magára hagyja a féltve örzőtt kincsesládát, amit felnyitsz és egy 
+4-es számjegyet találsz benne""")
+                items.append("4-es számjegy")
+                rooms.append(room_number)
+            else:
+                print("""Megpróbáltál bohóckodni neki, de csak finomnak tűntél számára, ezért felfalt.""")
+                gameOn = False
         else:
             print("Majd legközelebb...")
     if room_number == "7":
