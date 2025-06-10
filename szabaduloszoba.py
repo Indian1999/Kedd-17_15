@@ -30,7 +30,14 @@ egy szelet húst találsz benne. Még biztos jól fog jönni...""")
         else:
             print("Itt találtad a kulcsot")
     if room_number == "1":
-        pass
+        if room_number not in rooms:
+            rooms.append(room_number)
+            items.append("mesekönyv")
+        print("""Ebben a szobában egy képes mesekönyv található, ami így szól:
+    Egyszer volt, hol nem volt, volt egy egyszer egy oroszlán, aki nagyon
+szerette a bináris egyenleteket. Egész nap csak ilyen feladatokon dolgozott
+a barátjával Cirmivel, a bohóc cicával. Itt a vége fuss el véle...
+Elég furcsa történet de villanykörte felvillan a fejed fölött!""")
     if room_number == "2":
         print("""Ebben a szobában a következő számsorozatot látod felírva egy tálbára: 1010011""")
         if room_number not in rooms:
