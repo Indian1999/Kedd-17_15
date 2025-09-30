@@ -3,6 +3,7 @@ from functools import cache
 import math
 import numpy as np # terminálba: pip install numpy
 import matplotlib.pyplot as plt # python -m pip install matplotlib
+from matplotlib.colors import LinearSegmentedColormap
 
 
 def modul_bevezeto():
@@ -50,3 +51,7 @@ mtx = [
     [0,0,1,0,0,1,0,0]
 ]
 
+my_cmap = LinearSegmentedColormap.from_list("creeper", ["green", "black"])
+plt.imshow(mtx, cmap=my_cmap)
+plt.axis("off")
+plt.show()
