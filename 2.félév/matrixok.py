@@ -114,12 +114,33 @@ colors[6][0][4:6] = [0,0,0]
 colors[1][0][4:6] = [0,0,0]
 colors[2][0][4:6] = [0,0,0]
 
-
 fig = plt.figure()
 ax = fig.add_subplot(111, projection="3d")
 ax.voxels(tér, facecolors=colors)
+plt.axis("off")
+plt.close()
 
+
+data = np.random.randint(0, 2, size = (8,8,8))
+data = np.random.choice([0, 1], size = (8,8,8), p = [0.9, 0.1])
+colors = np.random.random(size = (8,8,8,3))
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
+ax.voxels(data, facecolors=colors)
+plt.axis("off")
+plt.close()
+
+data = np.zeros((32,32,32))
+for i in range(400):
+    probabilities = [1/100 for i in range(32)]
+    probabilities[16] = 69/100
+    x,y,z = np.random.choice([i for i in range(0, 32)], size = 3, p = probabilities)
+    data[x][y][z] = 1
+
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
+ax.voxels(data)
+plt.axis("off")
 plt.show()
-
-
-
