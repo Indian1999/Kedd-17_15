@@ -74,3 +74,52 @@ for i in range(len(mtx3d)):
         for k in range(len(mtx3d[i][j])):
             összeg += mtx3d[i][j][k]
 print(összeg)
+
+
+# Kockák ábrázolása matplotlibbel és numpy-al
+
+axes = [5, 5, 5]
+cube = np.ones(axes) # Létrehoz egy 5*5*5-ös mátrixot, tele egyesekkel
+colors = np.empty(axes + [3]) # Létrehoz egy 5*5*5*3-as mátrixot, üres értékekkel
+# axes + [3] - > [5,5,5,3]
+colors[0] = [1, 0, 0] # Piros
+colors[1] = [0, 1, 0] # Zöld
+colors[2] = [0, 0, 1] # Kék
+colors[3] = [0, 1, 1] # Türkiz
+colors[4] = [1, 1, 0] # Sárga
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
+ax.voxels(cube, facecolors=colors, edgecolors="black", alpha=0.5)
+
+plt.close()
+
+tér = np.ones([8,8,8])
+colors = np.empty([8,8,8,3])
+colors[:] = [0,1,0]
+colors[2][0][0] = [0,0,0]
+colors[5][0][0] = [0,0,0]
+colors[2][0][1] = [0,0,0]
+colors[3][0][1] = [0,0,0]
+colors[4][0][1] = [0,0,0]
+colors[5][0][1] = [0,0,0]
+colors[2][0][2] = [0,0,0]
+colors[3][0][2] = [0,0,0]
+colors[4][0][2] = [0,0,0]
+colors[5][0][2] = [0,0,0]
+colors[3][0][3] = [0,0,0]
+colors[4][0][3] = [0,0,0]
+colors[5][0][4:6] = [0,0,0]
+colors[6][0][4:6] = [0,0,0]
+colors[1][0][4:6] = [0,0,0]
+colors[2][0][4:6] = [0,0,0]
+
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
+ax.voxels(tér, facecolors=colors)
+
+plt.show()
+
+
+
