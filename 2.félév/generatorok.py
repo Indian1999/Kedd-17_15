@@ -98,4 +98,26 @@ def prime_generator(n):
                 break
         num += 1
 
-print([i for i in prime_generator(200)])
+print([i for i in prime_generator(20)])
+
+# Készítsünk egy olyan generátor függvényt, ami egy bármilyen szűrőt alkalmaz egy listán
+def is_even(num):
+    return num % 2 == 0
+
+def is_two_digit(num):
+    return 10 <= num and 99 >= num
+
+def filter_list(lista, func):
+    for item in lista:
+        if func(item):
+            yield item
+lista = [random.randint(1, 100) for i in range(20)]
+evens = [i for i in filter_list(lista, is_even)]
+two_digits = [i for i in filter_list(lista, is_two_digit)]
+primes = [i for i in filter_list(lista, is_prime)]
+
+print(lista)
+print(evens)
+print(two_digits)
+print(primes)
+
