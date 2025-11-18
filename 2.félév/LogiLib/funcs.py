@@ -56,3 +56,15 @@ def fib(n: int) -> int:
         return memo[n]
     return f(n)
     
+def minimum(iterable):
+    if len(iterable) == 0:
+        raise ValueError("iterable cannot be empty")
+    try:
+        min_index = 0
+        for i in range(len(iterable)):
+            if iterable[i] < iterable[min_index]:
+                min_index = i
+        # Egyszerre visszaadjuk a legkisebb indexet és értéket is
+        return (min_index, iterable[min_index])
+    except Exception as ex:
+        raise ex
