@@ -93,19 +93,61 @@ print(lista)
 # 4. feladat: Határozzk meg a tuple-ök elemeinek az átlagát
 myTuple = ((1, 2, 3), (40, 13), (91, -23, 10), (-1, 0, 40, -50, 33))
 
+összeg = 0
+darab = 0
+for i in range(len(myTuple)):
+    for j in range(len(myTuple[i])):
+        összeg += myTuple[i][j]
+        darab += 1
+print("Az elemek átlaga:", round(összeg/darab, 2))
+
 # 5. feladat: Fordítsuk meg egy tuple elemeit
 myTuple = (1, 2, 3, 4, 5, 6)   # -> (6, 5, 4, 3, 2, 1)
+myTuple = tuple(item for item in myTuple[::-1])
+print(myTuple)
 
 # 6. feladat: Ugyan ennek a tuplenek vágjuk le az első és utolsó elemét,
 # majd mentsük el egy új tuple-be
+new_tuple = myTuple[1:-1]
+print(new_tuple)
 
 # 7. feladat: Határozzuk meg, hogy egy tuple-ben melyik indexen található az első kétjegyű szám
+myTuple = tuple(random.randint(1, 12) for i in range(10))
+print(myTuple)
+index = None
+for i in range(len(myTuple)):
+    if (myTuple[i] >= 10 and myTuple[i] <= 99) or (myTuple[i] >= -99 and myTuple[i] <= -10):
+        index = i
+        break
+if index != None:
+    print(f"Az első 2 számjegyű szám a {index}. indexen található.")
+else:
+    print("Nincs kétjegyű szám a tuple-ben.")
+
 
 # 8. feladat:  Számoljuk ki a vector-műveletek eredményét
-a = (3, 5)
-b = (-1, 3)
-c = (2, -1)
+a = (3, 5, 4)
+b = (-1, 3, 1)
+c = (2, -1, 9)
 # Határozzuk meg az       a + 2b - 3c vektort
+
+# (3, 5) + (2, -1) -> (5, 4)
+# (3, 5) * 3       -> (9, 15)
+
+def add_vector(vector1, vector2):
+    new_vector = []
+    for i in range(len(vector1)):
+        new_vector.append(vector1[i] + vector2[i])
+    return tuple(new_vector)
+
+def multiply_vector(vector, scalar):
+    return tuple(scalar * item for item in vector)
+
+result = add_vector(a, multiply_vector(b, 2))
+result = add_vector(result, multiply_vector(c, -3))
+
+print(result) # (-5, 14)
+
 
 
 
