@@ -3,10 +3,10 @@ import random
 
 path_olimpia = os.path.dirname(__file__) # Az a mappa, amiben a jelenleg futó script van
 print(path_olimpia)
-path_olimpia = os.path.join(path_olimpia, "olimpia.txt")
+path_olimpia = os.path.join(path_olimpia, "forras", "olimpia.txt")
 print(path_olimpia)
 
-f = open("2.félév/olimpia.txt", "r", encoding="utf-8")
+f = open(path_olimpia, "r", encoding="utf-8")
 #szöveg = f.read()
 
 #for line in f:
@@ -55,7 +55,7 @@ with open(output_path, "w", encoding="utf-8") as f:
 
 # Olvassuk be és tároljuk el a homerseklet.txt fájlban található adatokat
 homersekletek = []
-path_homerseklet = os.path.join(os.path.dirname(__file__), "homerseklet.txt")
+path_homerseklet = os.path.join(os.path.dirname(__file__), "forras", "homerseklet.txt")
 with open(path_homerseklet, "r", encoding="utf-8") as f:
     for line in f:
         line = line.strip().split(";") # ['33', '31', '-1', '3', '3', '-7', '26']
