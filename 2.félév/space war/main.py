@@ -2,6 +2,7 @@ import pygame # pip install pygame
 import os
 import random
 import math
+import time
 pygame.mixer.init()
 pygame.font.init()
 
@@ -21,8 +22,13 @@ SPACESHIP_HEIGHT = HEIGHT // 7
 METEOR_WIDTH = WIDTH // 19
 METEOR_HEIGHT = HEIGHT // 10
 
+ICON_SIZE = WIDTH // 18
+
 FPS = 60
 VELOCITY = 5
+
+SHIELD_COOLDOWN = 10
+SHIELD_UPTIME = 2
 
 RED_HIT = pygame.USEREVENT + 1
 YELLOW_HIT = pygame.USEREVENT + 2
@@ -48,6 +54,10 @@ YELLOW_SPACESHIP = pygame.image.load(os.path.join(ASSETS, "spaceship_yellow.png"
 YELLOW_SPACESHIP = pygame.transform.scale(YELLOW_SPACESHIP, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
 YELLOW_SPACESHIP = pygame.transform.rotate(YELLOW_SPACESHIP, 90)
 
+SHIELD = pygame.image.load(os.path.join(ASSETS, "shield.png"))
+SHIELD = pygame.transform.scale(SHIELD, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT))
+
+SMALL_SHIELD = pygame.transform.scale(SHIELD, (ICON_SIZE, ICON_SIZE)) 
 
 METEOR = pygame.image.load(os.path.join(ASSETS, "meteor.png"))
 METEOR = pygame.transform.scale(METEOR, (METEOR_WIDTH, METEOR_HEIGHT))
@@ -70,7 +80,18 @@ class Yellow:
     def __init__(self):
         self.rect = pygame.Rect(WIDTH - SPACESHIP_WIDTH - 20, HEIGHT // 2 - SPACESHIP_HEIGHT // 2, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
         self.health = 10
+        self.shield_up = False
+        self.shield_on_cd = False
+        self.shield_last_used = 0
         self.bullets = []
+
+    def get_shield_cd_rate(self):
+        if self.shield_on_cd:
+            elapsed_time = time.time() - self.shield_last_used
+            remaining = SHIELD_COOLDOWN - elapsed_time
+            return remaining / SHIELD_COOLDOWN
+        else:
+            return 0
 
     def controll(self, keys_pressed):
         if keys_pressed[pygame.K_LEFT] and self.rect.x > WIDTH // 2 + 5:
@@ -81,6 +102,22 @@ class Yellow:
             self.rect.y -= VELOCITY
         if keys_pressed[pygame.K_DOWN] and self.rect.y < HEIGHT - SPACESHIP_HEIGHT - 5:
             self.rect.y += VELOCITY
+        if keys_pressed[pygame.K_RSHIFT]:
+            self.activate_shield()
+        if self.shield_last_used + SHIELD_COOLDOWN < time.time():
+            self.shield_on_cd = False
+        if self.shield_last_used + SHIELD_UPTIME < time.time():
+            self.deactivate_shield()
+
+    def activate_shield(self):
+        if self.shield_on_cd:
+            return
+        self.shield_up = True
+        self.shield_on_cd = True
+        self.shield_last_used = time.time()
+
+    def deactivate_shield(self):
+        self.shield_up = False
 
     def shoot(self):
         if len(self.bullets) < 3:
@@ -93,7 +130,18 @@ class Red:
     def __init__(self):
         self.rect = pygame.Rect(20, HEIGHT // 2 - SPACESHIP_HEIGHT // 2, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
         self.health = 10
+        self.shield_up = False
+        self.shield_on_cd = False
+        self.shield_last_used = 0
         self.bullets = []
+        
+    def get_shield_cd_rate(self):
+        if self.shield_on_cd:
+            elapsed_time = time.time() - self.shield_last_used
+            remaining = SHIELD_COOLDOWN - elapsed_time
+            return remaining / SHIELD_COOLDOWN
+        else:
+            return 0
 
     def controll(self, keys_pressed):
         if keys_pressed[pygame.K_a] and self.rect.x > 5:
@@ -104,6 +152,22 @@ class Red:
             self.rect.y -= VELOCITY
         if keys_pressed[pygame.K_s] and self.rect.y < HEIGHT - SPACESHIP_HEIGHT - 5:
             self.rect.y += VELOCITY
+        if keys_pressed[pygame.K_LSHIFT]:
+            self.activate_shield()
+        if self.shield_last_used + SHIELD_COOLDOWN < time.time():
+            self.shield_on_cd = False
+        if self.shield_last_used + SHIELD_UPTIME < time.time():
+            self.deactivate_shield()
+
+    def activate_shield(self):
+        if self.shield_on_cd:
+            return
+        self.shield_up = True
+        self.shield_on_cd = True
+        self.shield_last_used = time.time()
+
+    def deactivate_shield(self):
+        self.shield_up = False
 
     def shoot(self):
         if len(self.bullets) < 3:
@@ -158,7 +222,12 @@ def draw_frame(red, yellow, meteors):
     pygame.draw.rect(WINDOW, BLACK, BORDER)
 
     WINDOW.blit(RED_SPACESHIP, (red.rect.x, red.rect.y))
+    if red.shield_up:
+        WINDOW.blit(SHIELD, (red.rect.x, red.rect.y))
+
     WINDOW.blit(YELLOW_SPACESHIP, (yellow.rect.x, yellow.rect.y))
+    if yellow.shield_up:
+        WINDOW.blit(SHIELD, (yellow.rect.x, yellow.rect.y))
 
     for bullet in red.bullets:
         pygame.draw.rect(WINDOW, RED, bullet)
@@ -172,6 +241,14 @@ def draw_frame(red, yellow, meteors):
     yellow_health_text = HEALTH_FONT.render(f"Health: {yellow.health}", True, WHITE)
     WINDOW.blit(red_health_text, (10, 10))
     WINDOW.blit(yellow_health_text, (WIDTH-yellow_health_text.get_width()-10, 10))
+
+
+    WINDOW.blit(SMALL_SHIELD, (10, HEIGHT - ICON_SIZE - 10))
+    WINDOW.blit(SMALL_SHIELD, (WIDTH-ICON_SIZE-10, HEIGHT - ICON_SIZE - 10))
+    pygame.draw.rect(WINDOW, (150,150,150), 
+                     pygame.Rect(10, HEIGHT - ICON_SIZE - 10, ICON_SIZE, ICON_SIZE * red.get_shield_cd_rate()))
+    pygame.draw.rect(WINDOW, (150,150,150), 
+                     pygame.Rect(WIDTH - ICON_SIZE - 10, HEIGHT - ICON_SIZE - 10, ICON_SIZE, ICON_SIZE * yellow.get_shield_cd_rate()))
 
     pygame.display.update()
   
@@ -196,12 +273,22 @@ def check_meteor_damage(meteors, red, yellow):
 def check_bullet_damage(red, yellow):
     for bullet in red.bullets:
         if bullet.rect.colliderect(yellow.rect):
-            pygame.event.post(pygame.event.Event(YELLOW_HIT))
-            red.bullets.remove(bullet)
+            if yellow.shield_up:
+                bullet.dire *= -1
+                red.bullets.remove(bullet)
+                yellow.bullets.append(bullet)
+            else:
+                pygame.event.post(pygame.event.Event(YELLOW_HIT))
+                red.bullets.remove(bullet)
     for bullet in yellow.bullets:
         if bullet.rect.colliderect(red.rect):
-            pygame.event.post(pygame.event.Event(RED_HIT))
-            yellow.bullets.remove(bullet)
+            if red.shield_up:
+                bullet.dire *= -1
+                yellow.bullets.remove(bullet)
+                red.bullets.append(bullet)
+            else:
+                pygame.event.post(pygame.event.Event(RED_HIT))
+                yellow.bullets.remove(bullet)
 
 def main():
     red = Red()
@@ -254,5 +341,31 @@ def main():
             draw_winner("Yellow Wins!")
             break
 
+class Lobby:
+    def __init__(self):
+        self.window = pygame.display.set_mode((WIDTH, HEIGHT))
+
+    def draw_frame(self):
+        self.window.fill((0,0,0))
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+        color = (180,180,180)
+        if mouse[0] > 10 and mouse[0] < WIDTH - 20 and mouse[1] > 10 and mouse[1] < 60:
+            color = (120,120,120)
+            #LASER_SOUND.play()
+            if click[0] == 1:
+                main()
+        pygame.draw.rect(self.window, color, pygame.Rect(10, 10, WIDTH-20, 50))
+        text = HEALTH_FONT.render("Play", True, WHITE)
+        self.window.blit(text, (WIDTH//2 - text.get_width()//2, 12))
+
+        pygame.display.update()
+
 if __name__ == "__main__":
-    main()
+    lobby = Lobby()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+        lobby.draw_frame()
