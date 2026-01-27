@@ -5,8 +5,8 @@ import math
 pygame.mixer.init()
 pygame.font.init()
 
-WIDTH = 900
-HEIGHT = 500
+WIDTH = 1280
+HEIGHT = 720
 
 BLACK = (0,0,0)
 WHITE = (255,255,255)
@@ -61,8 +61,10 @@ class Bullet:
         self.rect= pygame.Rect(x, y, 10, 5)
         self.dire = direction
 
-    def handle_movement(self):
+    def handle_movement(self, player):
         self.rect.x += self.dire * (VELOCITY+3)
+        if self.rect.x < -50 or self.rect.x > WIDTH+50:
+            player.bullets.remove(self)
 
 class Yellow:
     def __init__(self):
@@ -107,9 +109,8 @@ class Red:
         if len(self.bullets) < 3:
             start_x = self.rect.x + SPACESHIP_WIDTH - 5
             start_y = self.rect.y + SPACESHIP_HEIGHT // 2
-            bullet = Bullet(start_x, start_y, -1)
+            bullet = Bullet(start_x, start_y, 1)
             self.bullets.append(bullet)
-
 
 class Meteor:
     def __init__(self):
@@ -133,14 +134,18 @@ class Meteor:
             y = random.randint(HEIGHT+50, HEIGHT+100)
         self.rect.x = x
         self.rect.y = y
+        self.x = x
+        self.y = y
         x_goal = random.randint(50, WIDTH - 50)
         y_goal = random.randint(50, HEIGHT - 50)
         d = ((x_goal-x)**2 + (y_goal-y)**2)**0.5
         self.direction = ((x_goal-x)/d, (y_goal-y)/d)
 
     def handle_movement(self):
-        self.rect.x += self.direction[0] * (VELOCITY - 1)
-        self.rect.y += self.direction[1] * (VELOCITY - 1)
+        self.x += self.direction[0] * (VELOCITY - 1)
+        self.y += self.direction[1] * (VELOCITY - 1)
+        self.rect.x = self.x
+        self.rect.y = self.y
         if self.rect.x < -50 or self.rect.x > WIDTH + 50:
             self.setup()
             return
@@ -197,6 +202,7 @@ def check_bullet_damage(red, yellow):
         if bullet.rect.colliderect(red.rect):
             pygame.event.post(pygame.event.Event(RED_HIT))
             yellow.bullets.remove(bullet)
+
 def main():
     red = Red()
     yellow = Yellow()
@@ -230,9 +236,9 @@ def main():
         red.controll(keys_pressed)
         yellow.controll(keys_pressed)
         for bullet in yellow.bullets:
-            bullet.handle_movement()
+            bullet.handle_movement(yellow)
         for bullet in red.bullets:
-            bullet.handle_movement()
+            bullet.handle_movement(red)
         for meteor in meteors:
             meteor.handle_movement()
 
