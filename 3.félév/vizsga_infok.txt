@@ -54,5 +54,5 @@ Témakörök:
 
 Egy-egy kérdésben felbukkanhatnak (de csak a logiscool-os vizsgán)
     fájlkezelés, txt, csv, fájlok
-    libraryk, modulok (pandas, numpy, matplolib)
+    libraryk, modulok (pandas, numpy, matplolib, pygame)
     alap modulok (math, random, os)
