@@ -1,0 +1,58 @@
+35 teszt kérdés 60 perc áll rendelkezésre
+
+Kérdések lehetnek:
+Felelet választós 4 ből 1 a jó
+Több helyes válasz
+Drag and drop (párosítgatás, stb.)
+kódkiegészítés (1 sornyi kód)
+
+Ha minimum 51%, akkor megvan vizsga
+
+A Logiscool-os vizsga a hivatalos Python PCEP vizsgán alapszik (annál, 75% a minimum)
+
+Témakörök:
+
+1. Alap koncepciók (5 kérdés):
+    Literálok: logikai, egész, float értékek, szövegek
+    kommentek, print, input
+    aritmetikai operátorok (matematikai) +, -, /, *, %, //, **
+    szöveg operátorok *, +
+    értékadó operátorok =, +=, *=, stb.
+    Interpreter/Compiler, python alap tulajdonságai, indentálás, kulcsszavak
+
+2. típúsok, kiértékelés (6 kérdés):
+    int, float, bool, string
+    logikai operátorok (and, or, not)
+    logikai kifejezések
+    Relációs operátorok (>, <, <=, ==, !=)
+    A float-ok pontossága
+    print formázás (f string, end=, sep=)
+    stringek kezelése
+    Bit szintü operátorok (~, &, |, <<, >>, ^)
+
+3. Vezérlési elemek ( 6 kérdés):
+    ciklusok
+    elágazások
+    Ezek egymásba ágyazása
+    Ciklusok az else ága
+    ciklusvezérlők (break, continue)
+    pass
+
+4. Adatszerkezetek (7 kérdés):
+    listák, szótárak, tuple-ök, halmazok
+    append(), sort(), sorted(), len(), insert(), stb.
+    mátrixok (listák listája)
+    slicingolós indexelés
+    string műveletek, "\" escape karakter
+
+5. Függvények, kivételkezelés (6 kérdés):
+    return, yield
+    rekurzív Függvények
+    függvények paramétere/argumentuma
+    pozícionális/kulcsszavas paraméterek
+    try-except-finally, TypeError, ValueError, stb.
+
+Egy-egy kérdésben felbukkanhatnak (de csak a logiscool-os vizsgán)
+    fájlkezelés, txt, csv, fájlok
+    libraryk, modulok (pandas, numpy, matplolib)
+    alap modulok (math, random, os)
