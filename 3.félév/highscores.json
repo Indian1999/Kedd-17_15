@@ -1,14 +1,9 @@
 {
-    "highscores": [
-        {
+    "highscores": {
+        "0": {
             "name": "John Doe",
-            "score": 12,
+            "score": 1,
             "timestap": 1723123123
-        },
-        {
-            "name": "Kukor Ica",
-            "score": 9,
-            "timestap": 1713123123
         }
-    ]
+    }
 }

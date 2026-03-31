@@ -1,5 +1,8 @@
 import pygame
 import random
+import requests
+import time
+import getpass
 pygame.font.init()
 
 class Food:
@@ -67,6 +70,7 @@ class SnakeGame:
     YELLOW = (255, 255, 0)
     BLACK = (0,0,0)
     clock = pygame.time.Clock()
+    URL = "https://snake-kedd-default-rtdb.europe-west1.firebasedatabase.app/highscores.json"
 
     def __init__(self, rows=20, cols=30, pixel_size = 30, speed = 10):
         self.rows = rows
@@ -77,6 +81,30 @@ class SnakeGame:
         self.HEIGHT = rows * pixel_size
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption("Snake")
+
+    def get_top_10(self):
+        response = requests.get(SnakeGame.URL)
+
+        if response.status_code == 200:
+            highscores = response.json()
+            highscores_list = list(highscores.items())
+            highscores_list.sort(key=lambda x: x[1]["score"], reverse=True)
+            highscores_list = highscores_list[:10]
+            return dict(highscores_list)
+
+        else:
+            raise ConnectionError("Could not connect to Firebase database.")
+
+    def post_highscore(self):
+        data = {
+            "name": getpass.getuser(),
+            "score": self.snake.length - 1,
+            "timestamp": int(time.time())
+        }
+        response = requests.post(SnakeGame.URL, json=data)
+
+        if response.status_code != 200:
+            raise ConnectionError("Could not connect to Firebase database.")
 
     def draw_frame(self):
         self.window.fill(SnakeGame.BLUE)
@@ -94,14 +122,26 @@ class SnakeGame:
 
         game_over_text = game_over_font.render("R: Újraindítás | Q: Kilépés", True, SnakeGame.RED)
         score_text = score_font.render(f"Score: {self.snake.length - 1}", True, SnakeGame.WHITE)
+        highscore_text = score_font.render("HIGHSCORES:", True, SnakeGame.BLACK)
 
         self.window.blit(game_over_text,
                          [self.WIDTH//2 - game_over_text.get_width() // 2,
-                          self.HEIGHT//2 - game_over_text.get_height()])
+                          game_over_text.get_height()])
         self.window.blit(score_text,
                          [self.WIDTH//2 - score_text.get_width() // 2,
-                          self.HEIGHT//2 + score_text.get_height()])
-
+                          game_over_text.get_height() + score_text.get_height()])
+        self.window.blit(highscore_text,
+                         [self.WIDTH//2 - highscore_text.get_width() // 2,
+                          highscore_text.get_height() +game_over_text.get_height() + score_text.get_height()])
+        
+        start_y = highscore_text.get_height() +game_over_text.get_height() + score_text.get_height()
+        i = 1
+        for highscore in self.get_top_10().values():  # {"name": "Dani", "score": 10, "timestamp": 1234213}
+            text = game_over_font.render(f"{i}. {highscore['name']}: {highscore['score']}", True, SnakeGame.WHITE)
+            self.window.blit(text,
+                             [self.WIDTH // 2 - text.get_width() // 2,                                 
+                             start_y + i * self.pixel_size * 1.5])
+            i += 1
         pygame.display.update()
 
     def game_loop(self):
@@ -153,6 +193,7 @@ class SnakeGame:
 
             if self.snake.x < 0 or self.snake.x > self.WIDTH or self.snake.y < 0 or self.snake.y > self.HEIGHT:
                 game_over = True
+                self.post_highscore()
 
             if self.snake.is_touching(self.food):
                 self.snake.increase_length()
@@ -162,6 +203,7 @@ class SnakeGame:
 
             if self.snake.is_self_bitten():
                 game_over = True
+                self.post_highscore()
             
             self.draw_frame()
 

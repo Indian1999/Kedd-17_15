@@ -25,5 +25,5 @@ def post_highscore(name, score):
     else:
         print("ERROR:", response.status_code)
 
-print(post_highscore("Dani", 8))
+print(post_highscore("asd", 3))
 print(get_highscores())
