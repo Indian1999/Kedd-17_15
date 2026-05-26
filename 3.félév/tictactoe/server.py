@@ -108,6 +108,7 @@ async def websocket_endpoint(ws: WebSocket):
                         "message": "Nem a te köröd van!"
                     }))
                     continue
+
                 if symbol == "O" and turn_x:
                     await ws.send_text(json.dumps({
                         "type": "error",
@@ -121,5 +122,31 @@ async def websocket_endpoint(ws: WebSocket):
                         "message": "Érvénytelen lépés!"
                     }))
                     continue
+
+                board[index[0]][index[1]] = symbol
+                turn_x = not turn_x
+
+                winner = check_winner()
+                if winner:
+                    await broadcast({
+                        "type": "end",
+                        "board": board,
+                        "winner": winner
+                    })
+                    to_kill = []
+                    for player in players:
+                        to_kill.append(player)
+                    for player in to_kill:
+                        await player.close()
+                        players.remove(player)
+                    reset()
+                else:
+                    await broadcast({
+                        "type": "update",
+                        "board": board,
+                        "turn_x": turn_x
+                    })
     except:
-        pass
+        players.remove(ws)
+        await broadcast({"type": "opponent left", "message": "Your opponent left!"})
+        reset()
