@@ -1,0 +1,11 @@
+uvicorn server:app --reload
+-> Elindítja a szervert, ha módosítjuk újraindul
+
+Ubuntu szerveren futtatva:
+nohup uvicorn server:app --host 0.0.0.0 --port 8000 > output.log 2>&1 &
+
+
+nohup -> ne eméssze fel a console-t
+--host 0.0.0.0  -> bárhonnan elérhető
+--port 8000     -> 8000-es porton érhető elérhető
+> output.log    -> amit console-ra írna azt az output.log fájlba fogja

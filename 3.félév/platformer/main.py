@@ -70,7 +70,6 @@ class Game:
                 if coin.rect.top >= Game.HEIGHT:
                     coin.kill()
         
-
     def generate_coin(self, x, y, xvel, chance = 0.15):
         if random.random() < chance:
             c = Coin(x, y, xvel)
@@ -83,7 +82,6 @@ class Game:
             return
         self.score += 5
         coin.kill()
-
 
     def run(self):
         self.player = Player()
@@ -234,8 +232,6 @@ class Player(pygame.sprite.Sprite):
         if self.jumping:
             if self.vel.y < -3:
                 self.vel.y = -3
-
-
 
 game = Game()
 game.run()

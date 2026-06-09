@@ -6,7 +6,7 @@ import websockets
 import json
 import queue
 
-SERVER_URL = "ws://localhost:8000/ws"
+SERVER_URL = "ws://hauerszabolcs.hu:8019/ws"
 
 class TicTacToeClient:
     def __init__(self, root):
